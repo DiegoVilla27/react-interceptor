@@ -4,7 +4,7 @@ React Interceptor to request/response http
 
 - This project was generated with [Vite](https://vitejs.dev/guide/) version 5.3.1
 ```bash
-npm create vite@latest react-rules -- --template react-ts
+npm create vite@latest react-interceptor -- --template react-ts
 ```
 - React - 18.3.1
 - Node - Version 20.12.2
