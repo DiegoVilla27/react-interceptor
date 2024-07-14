@@ -1,0 +1,16 @@
+.usersBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+}
+
+.usersTitle {
+  font-size: 4rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.usersDivide {
+  width: 100%;
+}

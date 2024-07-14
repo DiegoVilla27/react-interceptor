@@ -1,10 +1,9 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import ReactDOM from "react-dom/client";
+import Users from "./components/users";
+import "./index.css";
+import axios from "axios";
+import { setupInterceptorsTo } from "./interceptor";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+setupInterceptorsTo(axios);
+
+ReactDOM.createRoot(document.getElementById("root")!).render(<Users />);
