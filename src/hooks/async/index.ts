@@ -1,5 +1,9 @@
 import { AxiosResponse } from "axios";
-import { useEffect } from "react";
+import { DependencyList, useEffect } from "react";
+
+type AsyncFn<T> = () => Promise<AxiosResponse<T> | undefined>;
+type SuccessFn<T> = (res: AxiosResponse<T> | undefined) => void;
+type ReturnFn = () => void;
 
 /**
  * Async request with useEffect
@@ -8,19 +12,15 @@ import { useEffect } from "react";
  * @param returnFn
  * @param dependencies
  */
-export const useAsyncEffect = (
-  asyncFn: () => // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Promise<AxiosResponse<any, any>>,
-  successFn: // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (res: any) => void,
-  returnFn?: (() => void) | null,
-  dependencies?: // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  any[]
+export const useAsyncEffect = <T>(
+  asyncFn: AsyncFn<T>,
+  successFn: SuccessFn<T>,
+  returnFn?: ReturnFn | null,
+  dependencies?: DependencyList
 ): void => {
   useEffect(() => {
     let isActive = true;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    asyncFn().then((res: any) => {
+    asyncFn().then((res) => {
       if (isActive) successFn(res);
     });
     return () => {
@@ -36,14 +36,11 @@ export const useAsyncEffect = (
  * @param asyncFn
  * @param successFn
  */
-export const useAsync = (
-  asyncFn: () => // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Promise<AxiosResponse<any, any>>,
-  successFn: // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (res: any) => void
+export const useAsync = <T>(
+  asyncFn: AsyncFn<T>,
+  successFn: SuccessFn<T>
 ): void => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  asyncFn().then((res: any) => {
+  asyncFn().then((res) => {
     successFn(res);
   });
 };

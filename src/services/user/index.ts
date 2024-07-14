@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { environments } from "../../environments";
 import { IUsersResponse } from "./interface";
 
@@ -7,6 +7,7 @@ import { IUsersResponse } from "./interface";
  * @param options
  * @returns { users as IUser[] }
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getUsers = (options?: any) =>
+export const getUsers = (
+  options?: AxiosRequestConfig
+): Promise<AxiosResponse<IUsersResponse>> =>
   axios.get<IUsersResponse>(`${environments.api_url}/?results=10`, options);
