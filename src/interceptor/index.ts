@@ -9,6 +9,7 @@ const onRequest = (
   req: InternalAxiosRequestConfig
 ): InternalAxiosRequestConfig => {
   if (req.url?.includes("assets") || req.headers?.Authorization) return req;
+  req.headers["Cabuweb"] = "https://cabuweb.com";
 
   // Add token to header if exists in local storage
   const token = localStorage.getItem("token");
