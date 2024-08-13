@@ -29,6 +29,25 @@ const onResponse = (response: AxiosResponse): AxiosResponse => {
 };
 
 const onResponseError = (error: AxiosError): Promise<AxiosError> => {
+  if (error.response) {
+    const status = error.response.status;
+    switch (status) {
+      case 500:
+        // eslint-disable-next-line no-console
+        console.error("A server error has occurred. Please try again later.");
+        break;
+      default:
+        // eslint-disable-next-line no-console
+        console.error(`Error: ${status}`, error.response.data);
+    }
+  } else {
+    // eslint-disable-next-line no-console
+    console.error("No server response error", error);
+    // eslint-disable-next-line no-console
+    console.error(
+      "The connection to the server could not be established. Please check your connection."
+    );
+  }
   return Promise.reject(error);
 };
 
